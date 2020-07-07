@@ -56,7 +56,7 @@ import Hammer from 'hammerjs';
         }else{
             try {
                 const result = await singin(user);
-                console.log(result);
+               // console.log(result);
                 if(result.error){
                     this.setState({error:result.error});
                 }else{
@@ -94,7 +94,7 @@ import Hammer from 'hammerjs';
         }
         if(redirect){
             return(
-                <Redirect to={"/Principal"} />
+                <Redirect to={"/"} />
             )
         }
         if(redirectSignUp){

@@ -39,25 +39,6 @@ export const singup = (user) => {
 };
 
 export const singout = (next) =>{
-    //alert
-    const swalWithBootstrapButtons = Swal.mixin({
-        customClass: {
-          confirmButton: 'btn btn-raised btn-success',
-          cancelButton: 'btn btn-raised btn-danger'
-        },
-        buttonsStyling: true,
-      });
-
-      swalWithBootstrapButtons.fire({
-        title: 'Continuar?',
-        text: "Esta a punto de cerrar sesion",
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Si, continuar!',
-        cancelButtonText: 'No, cancelar!',
-        reverseButtons: true
-      }).then((result) => {
-        if (result.value) {
             //Realizar la consulta
             if(typeof window !== "undefined"){localStorage.removeItem("jwt");}
             next();
@@ -67,17 +48,6 @@ export const singout = (next) =>{
                 console.log('singout', response);
                 return response.json();
             }).catch(err => console.log(err));
-
-        } else if (
-          // Read more about handling dismissals
-          result.dismiss === Swal.DismissReason.cancel
-        ) {
-          console.log("cancel alert");
-          
-        }
-      })  
-
-    //end alert
 
 };
 export const singoutDirect = (next) =>{

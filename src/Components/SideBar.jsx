@@ -1,24 +1,25 @@
 import React, { Component } from 'react';
-import { Link, useLocation,useHistory } from 'react-router-dom';
+import { Link,Redirect } from 'react-router-dom';
 import '../App.css';
 import $ from 'jquery';
 import Hammer from 'hammerjs';
 import logo from '../logo.svg';
-import { isAuthenticated } from '../auth';
+import { isAuthenticated,singout } from '../auth';
+import Swal from 'sweetalert2';
 
  class SideBar extends Component {
 
     constructor(){
         super();
         this.state = {
-            open:true
+            open:true,
+            redirect:false
         }
     }
 
 
 
     componentDidMount= () =>{
-        const { open } = this.state;
         let window = document.querySelector('#sidebar');
         //console.log(window);
         let hammer = new Hammer(window);
@@ -38,6 +39,44 @@ import { isAuthenticated } from '../auth';
         //let location = useLocation();
         
     }
+    signOut = () =>{
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+              confirmButton: 'btn btn-raised btn-success',
+              cancelButton: 'btn btn-raised btn-danger'
+            },
+            buttonsStyling: true,
+          });
+    
+          swalWithBootstrapButtons.fire({
+            title: 'Continuar?',
+            text: "Esta a punto de cerrar sesion",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Si, continuar!',
+            cancelButtonText: 'No, cancelar!',
+            reverseButtons: true
+          }).then(async(result) => {
+            if (result.value) {
+                //Realizar la consulta
+               const result = await singout(()=>(<><Redirect to={`/`} /></>));
+               if(result.error || !result){
+                   console.log("Error");
+               }else{
+                  this.setState({redirect:true});
+               }
+    
+            } else if (
+              // Read more about handling dismissals
+              result.dismiss === Swal.DismissReason.cancel
+            ) {
+              console.log("cancel alert");
+              
+            }
+          })  
+    
+        //end alert
+    }
 
     handleChange = name => event => {
 
@@ -45,8 +84,10 @@ import { isAuthenticated } from '../auth';
     
 
     render() {
-        const { status } = this.props;
-
+        const {redirect} = this.state;
+        if(redirect){
+            return <Redirect to={`/Acceso`} />
+        }
 
         let role = isAuthenticated().user.role;
         //console.log(isAuthenticated().user);
@@ -64,6 +105,7 @@ import { isAuthenticated } from '../auth';
            break;      
             
         }
+       
 
        //const photo = user.photo ? `${process.env.REACT_APP_API_URL}/user/photo/${user._id}` : logo;
 
@@ -93,7 +135,7 @@ import { isAuthenticated } from '../auth';
                                 <Link to={`/User/${isAuthenticated().user._id}`} className="fas fa-user"></Link>
                             </div>
                             <div className="colum_4 text-center">
-                                <i className="fas fa-power-off"></i>
+                                <i className="fas fa-power-off" onClick={this.signOut}></i>
                             </div>
                         </div>
                         <hr style={{borderTop:"1px dashed white"}} />
