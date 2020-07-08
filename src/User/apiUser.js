@@ -13,6 +13,20 @@ export const getUser = (token,userId) =>{
     }).catch(error => console.log(error));
  };
 
+ export const allUsers = (token,userId) =>{
+    //const userId = isAuthenticated().user._id;
+    return fetch(`${process.env.REACT_APP_API_URL}/users/all/${userId}`,{
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`
+        },
+    })
+    .then(response => {
+        return response.json();
+    }).catch(error => console.log(error));
+ };
+
  export const updateUser = (userId, token, user) => {
     console.log("USER DATA UPDATE: ", user);
     return fetch(`${process.env.REACT_APP_API_URL}/user/${userId}`, {

@@ -404,3 +404,56 @@
     display: none;
   }
 }
+
+
+.user-container{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  border-radius: 10px;
+  margin-bottom: 1px;
+}
+.user-container .user-image{
+  display:flex;
+  justify-content: center;
+  height: 100px;
+  width: auto;
+  border-radius: 10px;
+  background-color:lavender;
+
+}
+.user-container .user-image img{
+ width: 100px;
+ border-radius:50%;
+ overflow: hidden;
+}
+
+.user-container .user-information{
+  display: flex;
+  flex-direction: column;
+}
+
+.user-container .user-information p{
+  margin-left: 2px;
+}
+
+.user-container .user-information small{
+  margin-left:5px;
+}
+
+.user-container .user-information .information-footer{
+  display:flex;
+  flex:100%;
+  flex-direction:row;
+  justify-content: space-between;
+}
+
+.user-container .user-information .information-footer strong{
+  font-size: x-small;
+}
+
+.user-container .user-information .information-footer .icon-t{
+  font-size: x-small;
+  color:red;
+  
+}

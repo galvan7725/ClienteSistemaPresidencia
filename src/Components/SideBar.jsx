@@ -147,12 +147,18 @@ import Swal from 'sweetalert2';
                             <span className="list">Inicio</span>
                             </Link>
                         </li>
-                        <li>
-                            <Link to={`/Grupos/${isAuthenticated().user._id}`} id="link_grupos" >
-                            <span className="icon"><i className="fas fa-users"></i></span>
-                            <span className="list">Grupos</span>
-                            </Link>
-                        </li>
+
+                        {
+                            isAuthenticated().user.role === "admin" ? (<>
+                                <li>
+                                    <Link to={`/Usuarios/`} id="link_grupos" >
+                                    <span className="icon"><i className="fas fa-users"></i></span>
+                                    <span className="list">Grupos</span>
+                                    </Link>
+                                </li>
+                            </>) : (<></>)
+                        }
+
                         <li>
                             <a href="#">
                             <span className="icon"><i className="fas fa-address-book"></i></span>
