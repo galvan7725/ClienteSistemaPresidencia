@@ -27,6 +27,20 @@ export const getUser = (token,userId) =>{
     }).catch(error => console.log(error));
  };
 
+ export const deleteUser = (userId, token, adminId) => {
+    return fetch(`${process.env.REACT_APP_API_URL}/user/disableUser/${userId}/${adminId}`, {
+        method: "PUT",
+        headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`
+        }
+        })
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => console.log(err));
+};
+
  export const updateUser = (userId, token, user) => {
     console.log("USER DATA UPDATE: ", user);
     return fetch(`${process.env.REACT_APP_API_URL}/user/${userId}`, {

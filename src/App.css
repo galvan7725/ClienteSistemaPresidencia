@@ -453,7 +453,7 @@
 }
 
 .user-container .user-information .information-footer .icon-t{
-  font-size: x-small;
-  color:red;
-  
+margin-left: 3px;
+margin-right: 3px;
+cursor: pointer;
 }

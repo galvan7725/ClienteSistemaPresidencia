@@ -3,8 +3,11 @@ import NavBar from '../Components/NavBar';
 import SideBar from '../Components/SideBar';
 import '../App.css';
 import { isAuthenticated } from '../auth';
-import { allUsers } from './apiUser';
+import { allUsers,deleteUser } from './apiUser';
 import logo from '../logo.svg';
+import moment from 'moment';
+import 'moment/locale/es-us';
+import Swal from 'sweetalert2';
 
 class AllUsers extends Component {
 
@@ -13,21 +16,26 @@ class AllUsers extends Component {
         this.state = {
             redirect:false,
             error:"",
-            users:[]
+            users:[],
+            loading:false
             
         }
     }
 
     componentDidMount = async () =>{
+        this.setState({ loading:true});
+        moment().locale('es-us');
+        moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
         const token = isAuthenticated().token;
         const userId = isAuthenticated().user._id;
 
         try {
             const result = await allUsers(token,userId);
             console.log("Result",result);
-            this.setState({users:result});
+            this.setState({users:result,loading:false});
         } catch (error) {
             console.log(error);
+            this.setState({error:"Error en la consulta",loading:false});
         }
     }
 
@@ -39,9 +47,69 @@ class AllUsers extends Component {
        }
     }
 
+    deleteUser = async(userId) => {
+        //e.preventDefault();
+        console.log(userId);
+        const token = isAuthenticated().token;
+        const adminId = isAuthenticated().user._id;
+        
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+              confirmButton: 'btn btn-raised btn-success',
+              cancelButton: 'btn btn-raised btn-danger'
+            },
+            buttonsStyling: true,
+          });
+    
+          swalWithBootstrapButtons.fire({
+            title: 'Continuar?',
+            text: "Se dara de baja al usuario",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Si, continuar!',
+            cancelButtonText: 'No, cancelar!',
+            reverseButtons: true
+          }).then(async(result) => {
+            if (result.value) {
+                //Realizar la consulta
+                try {
+                    const result = await deleteUser(userId,token,adminId);
+                    console.log("Result",result);
+                } catch (error) {
+                    console.log(error);
+                }
+    
+            } else if (
+              // Read more about handling dismissals
+              result.dismiss === Swal.DismissReason.cancel
+            ) {
+              console.log("cancel alert");
+              
+            }
+          })  
+          
+    
+        //end alert
+    }
+
+    isActive = (st,userId) => {
+        if(st === "true"){
+            return (<>
+            <button className="btn btn-raised" id={userId} onClick={()=>this.deleteUser(userId)}>
+             <i className="icon-t fa fa-trash" style={{color:"red"}}> </i>
+            </button>
+            
+            </>)
+        }else{
+            return (<>
+                <i className="icon-t fa fa-user-check" style={{color:"white"}}></i>
+            </>)
+        }
+    }
+
 
     render() {
-        const { users } = this.state;
+        const { users,loading } = this.state;
 
 
         return (
@@ -67,10 +135,18 @@ class AllUsers extends Component {
                 <div className="row">
                     <h5>Todos los usuarios</h5>
 
-                    <div className="col-md-12">
+                    {
+                        loading ? (<>
+                        <div className="d-flex justify-content-center">
+                            <div className="spinner-border" role="status">
+                                <span className="sr-only">Loading...</span>
+                            </div>
+                        </div>
+                        </>) : (<>
+                            <div className="col-md-12">
                         {
                             users.map((user,i) =>(
-                                <div className="row" key={i}>
+                                <div className="row" key={i} >
                                     <div className="user-container" style={{backgroundColor:this.getBackgroundColor(user.active)}}>
                                         <div className="user-image">
                                             <img src={logo} alt="logo"/>
@@ -79,8 +155,14 @@ class AllUsers extends Component {
                                             <p>{user.name}</p>
                                             <small>{user.email}</small>
                                             <div className="information-footer">
-                                             <strong>Creado:{user.created}</strong>
-                                                <i className="icon-t"></i>    
+                                             <strong>Creado:{moment(user.created).format("dddd, MMMM Do YYYY, h:mm:ss a")}{". "}({moment(user.created).fromNow()})</strong>
+                                                {
+                                                    
+                                                    this.isActive(user.active,user._id)
+                                                }
+                                            
+                                                   
+
                                             </div>
                                         </div>
                                     </div>
@@ -88,6 +170,8 @@ class AllUsers extends Component {
                             ))
                         }
                     </div>
+                        </>)
+                    }
                 </div>
             </div>
             </div>
