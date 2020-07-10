@@ -8,6 +8,7 @@ import logo from '../logo.svg';
 import moment from 'moment';
 import 'moment/locale/es-us';
 import Swal from 'sweetalert2';
+import { Link,Redirect } from 'react-router-dom';
 
 class AllUsers extends Component {
 
@@ -26,7 +27,11 @@ class AllUsers extends Component {
         this.setState({ loading:true});
         moment().locale('es-us');
         moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
+        if(!isAuthenticated().user.role === "admin"){
+            this.setState({ redirect:true});
+        }
         await this.init();
+
     }
 
     init = async()=>{
@@ -192,8 +197,11 @@ class AllUsers extends Component {
 
 
     render() {
-        const { users,loading } = this.state;
+        const { users,loading,redirect } = this.state;
 
+        if(redirect){
+            return (<Redirect to={`/`}/>)
+        }
 
         return (
             <div className="wrapper active">
@@ -212,7 +220,7 @@ class AllUsers extends Component {
                     <div className="col-md-4">
                     </div>
                     <div className="col-md-4">
-                        <button className="btn btn-raised btn-success"><i className="fa fa-user-plus"></i>Agregar</button>
+                        <Link className="btn btn-raised btn-success"><i className="fa fa-user-plus"></i>Agregar</Link>
                     </div>
                 </div>
                 <div className="row">
@@ -226,7 +234,7 @@ class AllUsers extends Component {
                             </div>
                         </div>
                         </>) : (<>
-                            <div className="col-md-12">
+                            <div className="col-md-12" style={{maxHeight:"550px",overflow:"auto"}}>
                         {
                             users.map((user,i) =>(
                                 <div className="row" key={i} >
@@ -235,7 +243,7 @@ class AllUsers extends Component {
                                             <img src={logo} alt="logo"/>
                                         </div>
                                         <div className="user-information">
-                                            <p>{user.name}</p>
+                                                <p>{user.name}{user._id === isAuthenticated().user._id ? "(Usted)" : ""}</p>
                                             <small>{user.email}</small>
                                             <div className="information-footer">
                                              <strong>Creado:{moment(user.created).format("dddd, MMMM Do YYYY, h:mm:ss a")}{". "}({moment(user.created).fromNow()})</strong>
@@ -243,9 +251,6 @@ class AllUsers extends Component {
                                                     
                                                     this.isActive(user.active,user._id)
                                                 }
-                                            
-                                                   
-
                                             </div>
                                         </div>
                                     </div>
