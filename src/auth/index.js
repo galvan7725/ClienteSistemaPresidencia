@@ -1,12 +1,13 @@
-import Swal from 'sweetalert2';
 
-export const singup = (user) => {
+
+export const singup = (user,userId,token) => {
     
-    return  fetch(`${process.env.REACT_APP_API_URL}/singup`,{
+    return  fetch(`${process.env.REACT_APP_API_URL}/signup/${userId}`,{
           method: "POST",
           headers:{
               Accept: "application/json",
-              "Content-Type": "application/json"
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`
           },
           body: JSON.stringify(user)
       }).then(respnse =>{

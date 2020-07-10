@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import NavBar from '../Components/NavBar';
 import SideBar from '../Components/SideBar';
-import '../App.css';
+
 
 
  class Home extends Component {

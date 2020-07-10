@@ -188,8 +188,7 @@ class AllUsers extends Component {
         }else{
             return (<>
             <button className="btn btn-raised" onClick={()=>this.enableUser(userId)}>
-
-                <i className="icon-t fa fa-user-check" style={{color:"green"}}></i>
+                <i className="icon-t fa fa-user-plus" style={{color:"white"}}></i>
             </button>    
             </>)
         }
@@ -220,7 +219,7 @@ class AllUsers extends Component {
                     <div className="col-md-4">
                     </div>
                     <div className="col-md-4">
-                        <Link className="btn btn-raised btn-success"><i className="fa fa-user-plus"></i>Agregar</Link>
+                        <Link to={`/Usuario/Nuevo`} className="btn btn-raised btn-success"><i className="fa fa-user-plus"></i>Agregar</Link>
                     </div>
                 </div>
                 <div className="row">
