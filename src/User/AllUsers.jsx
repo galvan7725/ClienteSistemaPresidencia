@@ -4,7 +4,7 @@ import SideBar from '../Components/SideBar';
 import '../App.css';
 import { isAuthenticated } from '../auth';
 import { allUsers,deleteUser,enableUser } from './apiUser';
-import logo from '../logo.svg';
+import logo from '../Images/escudo2.png';
 import moment from 'moment';
 import 'moment/locale/es-us';
 import Swal from 'sweetalert2';
@@ -242,7 +242,7 @@ class AllUsers extends Component {
                                             <img src={logo} alt="logo"/>
                                         </div>
                                         <div className="user-information">
-                                                <p>{user.name}{user._id === isAuthenticated().user._id ? "(Usted)" : ""}</p>
+                                               <Link to={`/Usuario/${user._id}`} ><p>{user.name}{user._id === isAuthenticated().user._id ? "(Usted)" : ""}</p></Link> 
                                             <small>{user.email}</small>
                                             <div className="information-footer">
                                              <strong>Creado:{moment(user.created).format("dddd, MMMM Do YYYY, h:mm:ss a")}{". "}({moment(user.created).fromNow()})</strong>

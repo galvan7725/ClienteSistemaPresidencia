@@ -3,7 +3,7 @@ import { Link,Redirect } from 'react-router-dom';
 import '../App.css';
 import $ from 'jquery';
 import Hammer from 'hammerjs';
-import logo from '../logo.svg';
+import logo from '../Images/escudo2.png';
 import { isAuthenticated,singout } from '../auth';
 import Swal from 'sweetalert2';
 
@@ -132,7 +132,7 @@ import Swal from 'sweetalert2';
                                     <i className="fas fa-book"></i>
                             </div>
                             <div id="link-profile" className="colum_4 text-center">
-                                <Link to={`/User/${isAuthenticated().user._id}`} className="fas fa-user"></Link>
+                                <Link to={`/Usuario/${isAuthenticated().user._id}`} className="fas fa-user"></Link>
                             </div>
                             <div className="colum_4 text-center">
                                 <i className="fas fa-power-off" onClick={this.signOut}></i>
