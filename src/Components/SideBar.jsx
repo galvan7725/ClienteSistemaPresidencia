@@ -160,10 +160,10 @@ import Swal from 'sweetalert2';
                         }
 
                         <li>
-                            <a href="#">
+                            <Link to={`/Agenda/`} id="link_agenda">
                             <span className="icon"><i className="fas fa-address-book"></i></span>
                             <span className="list">Contact</span>
-                            </a>
+                            </Link>
                         </li>
                         <li>
                             <a href="#">
