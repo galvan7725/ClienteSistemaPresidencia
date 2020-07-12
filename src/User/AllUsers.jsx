@@ -239,7 +239,7 @@ class AllUsers extends Component {
                                 <div className="row" key={i} >
                                     <div className="user-container" style={{backgroundColor:this.getBackgroundColor(user.active)}}>
                                         <div className="user-image">
-                                            <img src={logo} alt="logo"/>
+                                            <img src={`${process.env.REACT_APP_API_URL}/user/photo/${user._id}`} onError={i => (i.target.src = `${logo}`)} alt="logo"/>
                                         </div>
                                         <div className="user-information">
                                                <Link to={`/Usuario/${user._id}`} ><p>{user.name}{user._id === isAuthenticated().user._id ? "(Usted)" : ""}</p></Link> 

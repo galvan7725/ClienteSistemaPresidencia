@@ -76,7 +76,7 @@ import logo from '../Images/escudo2.png';
                 <div className="row">
                     <div className="col-md-4">
                         <div className="profile-img">
-                            <img src={`${process.env.REACT_APP_API_URL}/user/photo/${isAuthenticated().user._id}`} onError={i => (i.target.src = `${logo}`)} alt="logo"/>
+                            <img src={`${process.env.REACT_APP_API_URL}/user/photo/${user._id}`} onError={i => (i.target.src = `${logo}`)} alt="logo"/>
                         </div>
                     </div>
                     <div className="col-md-6">
@@ -139,7 +139,7 @@ import logo from '../Images/escudo2.png';
                                                 <label>Telefono</label>
                                             </div>
                                             <div className="col-md-6">
-                                                <p>123 456 7890</p>
+                                                <p>{user.phone}</p>
                                             </div>
                                         </div>
                                         <div className="row">
