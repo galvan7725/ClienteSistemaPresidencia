@@ -9,6 +9,7 @@ import NewUser from '../User/NewUser';
 import Profile from '../User/Profile';
 import EditProfile from '../User/EditProfile';
 import AllMeetings from '../Meetings/AllMeetings';
+import NewMeeting from '../Meetings/NewMeeting';
 
 const MainRouter = () =>(
     <div>
@@ -21,6 +22,7 @@ const MainRouter = () =>(
             <PrivateRoute exact path="/Usuario/:userId" component={Profile}></PrivateRoute>
             <PrivateRoute exact path="/Usuario/Editar/:userId" component={EditProfile}></PrivateRoute>
             <PrivateRoute exact path="/Agenda/" component={AllMeetings}></PrivateRoute>
+            <PrivateRoute exact path="/Agenda/nuevo" component={NewMeeting} ></PrivateRoute>
 
         </Switch>
     </div>

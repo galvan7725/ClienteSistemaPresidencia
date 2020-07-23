@@ -1,12 +1,19 @@
-import React, { Component } from 'react'
+import React, { useState,useEffect } from 'react'
 
- class MeetingsTable extends Component {
-    render() {
-        return (
-            <div>
-                
-            </div>
-        )
-    }
+
+const MeetingsTable =() =>{
+
+    const [isLoading, setisLoading] = useState(false);
+    const [data, setdata] = useState({});
+
+
+
+    return(
+        <div>
+            <h2>Meeting Table</h2>
+        </div>
+    )
 }
+
+
 export default MeetingsTable;
