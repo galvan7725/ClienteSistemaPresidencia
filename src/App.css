@@ -550,3 +550,18 @@ cursor: pointer;
     font-weight: 600;
     color: #0062cc;
 }
+
+.container-persons{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+}
+.cont-users{
+  width:80%;
+  max-height: 100px;
+  overflow: auto;
+}
+.cont-r{
+  width:10%
+}
