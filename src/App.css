@@ -565,3 +565,74 @@ cursor: pointer;
 .cont-r{
   width:10%
 }
+
+.container-m{
+  max-height: 400px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.container-row{
+  width: 100%;
+  display:flex;
+  flex-direction: row;
+  margin-top: 2px;
+}
+
+.row-l{
+  width:20%;
+  display: flex;
+  flex-direction:column;
+  justify-content:space-between;
+  background-color: lightgrey;
+}
+
+.row-l-t{
+  display: flex;
+  flex-direction: column;
+}
+
+.row-l-b{
+  display: flex;
+  flex-direction: column;
+}
+
+.row-r{
+  width:80%;
+  background-color: aquamarine;
+}
+
+.row-r-t{
+  display: flex;
+  flex-direction: column;
+}
+
+.row-r-b{
+  display: flex;
+  flex-direction: column;
+}
+
+.r-b-b{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+
+@media(max-width:400px){
+  .row-l{
+    width: 40%;
+  }
+  .row-r{
+    width: 60%;
+  }
+
+  .r-b-b{
+    flex-direction: column;
+    justify-content: center;
+  }
+  .r-b-b button{
+    width: 50%;
+    margin: auto;
+  }
+}

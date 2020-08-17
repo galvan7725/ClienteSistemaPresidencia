@@ -11,3 +11,17 @@ export const getMeetings = (token) =>{
         return response.json();
     }).catch(error => console.log(error));
  };
+ export const newMeeting = (meeting,token) => {
+    
+    return  fetch(`${process.env.REACT_APP_API_URL}/meetings/new`,{
+          method: "POST",
+          headers:{
+              Accept: "application/json",
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify(meeting)
+      }).then(respnse =>{
+          return respnse.json();
+      }).catch(err => console.log(err));
+  };
