@@ -4,10 +4,18 @@ import SideBar from '../Components/SideBar';
 import Callendar from './Callendar';
 import { Link } from 'react-router-dom';
 import MeetingsTable from './MeetingsTable';
+import moment from 'moment';
+import 'moment/locale/es-us';
 
 
  const AllMeetings = () =>{
     const [view, setView] = useState("table");
+    const [date, setDate] = useState(moment().toDate());
+
+
+    const handleChange = () => event =>{
+        setDate(event.target.value);
+    }
 
         return (
             <div className="wrapper active">
@@ -33,12 +41,7 @@ import MeetingsTable from './MeetingsTable';
                     <div className="row text-center">
                         <div className="col-md-3"></div>
                         <div className="col-md-3"><h4>Vista</h4></div>
-                        <div className="col-md-3">
-                            <select id="oView" className="form-control">
-                                <option value="table">Tabla</option>
-                                <option value="callendar">Calendario</option>
-                            </select>
-                        </div>
+                        <input type="date" onChange={handleChange()}/>
                         <div className="col-md-3"></div>
                             
                             
@@ -47,7 +50,7 @@ import MeetingsTable from './MeetingsTable';
                     </div>
                     <div className="row">
                         <div className="col-md-12">
-                            {view === "table" ? (<MeetingsTable/>) : (<Callendar/>)}
+                            {view === "table" ? (<MeetingsTable date={date}/>) : (<Callendar/>)}
                         </div>
                     </div>
                 

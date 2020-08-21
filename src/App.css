@@ -584,7 +584,7 @@ cursor: pointer;
   display: flex;
   flex-direction:column;
   justify-content:space-between;
-  background-color: lightgrey;
+  border-right: 3px solid white;
 }
 
 .row-l-t{
@@ -599,7 +599,7 @@ cursor: pointer;
 
 .row-r{
   width:80%;
-  background-color: aquamarine;
+ 
 }
 
 .row-r-t{
@@ -615,7 +615,7 @@ cursor: pointer;
 .r-b-b{
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  
 }
 
 

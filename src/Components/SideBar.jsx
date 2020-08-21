@@ -153,7 +153,7 @@ import Swal from 'sweetalert2';
                                 <li>
                                     <Link to={`/Usuarios/`} id="link_grupos" >
                                     <span className="icon"><i className="fas fa-users"></i></span>
-                                    <span className="list">Grupos</span>
+                                    <span className="list">Usuarios</span>
                                     </Link>
                                 </li>
                             </>) : (<></>)
@@ -162,31 +162,10 @@ import Swal from 'sweetalert2';
                         <li>
                             <Link to={`/Agenda/`} id="link_agenda">
                             <span className="icon"><i className="fas fa-address-book"></i></span>
-                            <span className="list">Contact</span>
+                            <span className="list">Agenda</span>
                             </Link>
                         </li>
-                        <li>
-                            <a href="#">
-                            <span className="icon"><i className="fas fa-address-card"></i></span>
-                            <span className="list">About</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                            <span className="icon"><i className="fab fa-blogger"></i></span>
-                            <span className="list">Blogs</span>
-                            </a>
-                        </li>
-                        { isAuthenticated().user.role ==="admin" ? (<>
-                            <li>
-                            <a href="#">
-                            <span className="icon"><i className="fa fa-shield" aria-hidden="true"></i></span>
-                            <span className="list">Administrador</span>
-                            </a>
-                        </li>
-                        </>) : (<></>)
-                        
-                        }
+                    
                         </ul>
 
                         <div className="hamburger">
