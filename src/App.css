@@ -618,6 +618,15 @@ cursor: pointer;
   
 }
 
+.meeting-options{
+  display: flex;
+  flex-direction: row;
+
+}
+
+.meeting-options > span{
+  padding-top: 0px;
+}
 
 @media(max-width:400px){
   .row-l{
@@ -634,5 +643,8 @@ cursor: pointer;
   .r-b-b button{
     width: 50%;
     margin: auto;
+  }
+  .meeting-options{
+    flex-direction: column;
   }
 }

@@ -11,9 +11,9 @@ export const getMeetings = (token) =>{
         return response.json();
     }).catch(error => console.log(error));
  };
- export const getMeetingsByDate = (token,date) =>{
+ export const getMeetingsByDate = (token,date,dateRange) =>{
     //const userId = isAuthenticated().user._id;
-    return fetch(`${process.env.REACT_APP_API_URL}/meetings/date/${date}`,{
+    return fetch(`${process.env.REACT_APP_API_URL}/meetings/date/${date}?range=${dateRange}`,{
         method: "GET",
         headers: {
             Accept: "application/json",

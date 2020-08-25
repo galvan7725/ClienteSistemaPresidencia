@@ -11,10 +11,11 @@ import Swal from 'sweetalert2';
 
 
 
-const MeetingsTable =({date}) =>{
+const MeetingsTable =({date, range}) =>{
     console.log(date)
     const [isLoading, setisLoading] = useState(false);
     const [data, setdata] = useState([{persons:[]}]);
+    const [refresh, setRefresh] = useState(false);
     const token = isAuthenticated().token;
 
     useEffect(() =>{
@@ -22,13 +23,27 @@ const MeetingsTable =({date}) =>{
         moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
         const getData = async() =>{
             setisLoading(true)
-            const result = await getMeetingsByDate(token,date);
+            const result = await getMeetingsByDate(token,date,range);
            // console.log(result);
             setdata(result);
             setisLoading(false);
         }
         getData();
-    },[date]);
+    },[date,range]);
+
+    useEffect(() =>{
+        moment().locale('es-us');
+        moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
+        const getData = async() =>{
+            setisLoading(true)
+            const result = await getMeetingsByDate(token,date,range);
+           // console.log(result);
+            setdata(result);
+            setisLoading(false);
+        }
+        getData();
+    },[refresh]);
+
    
     const confirmationDialog = (message,type)=>{
         Swal.fire({
@@ -54,7 +69,8 @@ const MeetingsTable =({date}) =>{
                           }else{
                               console.log("Result:", result);
                               confirmationDialog("Modificacion exitosa","success");
-                              setdata(result);
+                            //setdata(result);
+                            refresh ? setRefresh(false) : setRefresh(true);
                               setisLoading(false);
                           }
                       break;
@@ -69,7 +85,8 @@ const MeetingsTable =({date}) =>{
                           }else{
                               console.log("Result:", res2);
                               confirmationDialog("Modificacion exitosa","success");
-                              setdata(res2);
+                              //setdata(res2);
+                              refresh ? setRefresh(false) : setRefresh(true);
                               setisLoading(false);
                           }
                       break;
@@ -84,7 +101,8 @@ const MeetingsTable =({date}) =>{
                           }else{
                               console.log("Result:", res3);
                               confirmationDialog("Modificacion exitosa","success");
-                              setdata(res3);
+                              //setdata(res3);
+                              refresh ? setRefresh(false) : setRefresh(true);
                               setisLoading(false);
                           }
                       break;

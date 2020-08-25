@@ -11,10 +11,15 @@ import 'moment/locale/es-us';
  const AllMeetings = () =>{
     const [view, setView] = useState("table");
     const [date, setDate] = useState(moment().toDate());
+    const [range, setRange] = useState("week")
 
 
     const handleChange = () => event =>{
         setDate(event.target.value);
+    }
+    const handleChangeRange = () => event =>{
+        console.log(event.target.value);
+        setRange(event.target.value);
     }
 
         return (
@@ -38,19 +43,19 @@ import 'moment/locale/es-us';
                         <Link to={`/Agenda/nuevo`} className="btn btn-raised btn-success">Nuevo</Link>
                     </div>
                     </div>
-                    <div className="row text-center">
-                        <div className="col-md-3"></div>
-                        <div className="col-md-3"><h4>Vista</h4></div>
-                        <input type="date" onChange={handleChange()}/>
-                        <div className="col-md-3"></div>
-                            
-                            
-                        
-                       
+                    <div className="meeting-options">
+                            <span>Fecha :</span>
+                            <input type="date" style={{paddingTop:"0px"}} onChange={handleChange()}/>
+                            <span>Rango:</span>
+                            <select name="range" id="range" onChange={handleChangeRange()}>
+                                <option value="day">Dia</option>
+                                <option value="week" selected="selected">Semana</option>
+                                <option value="month">Mes</option>
+                            </select>
                     </div>
                     <div className="row">
                         <div className="col-md-12">
-                            {view === "table" ? (<MeetingsTable date={date}/>) : (<Callendar/>)}
+                            {view === "table" ? (<MeetingsTable date={date} range={range}/>) : (<Callendar/>)}
                         </div>
                     </div>
                 
