@@ -32,8 +32,6 @@ const MeetingsTable =({date, range}) =>{
     },[date,range]);
 
     useEffect(() =>{
-        moment().locale('es-us');
-        moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
         const getData = async() =>{
             setisLoading(true)
             const result = await getMeetingsByDate(token,date,range);
